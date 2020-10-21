@@ -1,6 +1,7 @@
 package config
 
 import (
+	"io/ioutil"
 	T "mirror/tool"
 
 	"gopkg.in/yaml.v2"
@@ -21,24 +22,15 @@ type Yaml struct {
 	HandleCookie bool       `yaml:"handle_cookie"`
 }
 
-var data = `
-enable_ssl: True
-handle_cookie: True
 
-host:
-  self: mirror.loerfy.now.sh
-  proxy: www.google.com
-
-replaced_urls:
-  - old: www.google.com
-    new: mirror.loerfy.now.sh
-`
 var Config *Yaml
 var Protocal string
 
 func LoadConfig() {
 	Config = new(Yaml)
-	err := yaml.Unmarshal([]byte(data), Config)
+	yamlFile, err := ioutil.ReadFile("./config.yaml")
+	T.CheckErr(err)
+	err = yaml.Unmarshal(yamlFile, Config)
 	T.CheckErr(err)
 	if Config.EnableSSL {
 		Protocal = "https://"
