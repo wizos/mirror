@@ -27,10 +27,10 @@ handle_cookie: True
 
 host:
   self: inoreader.vercel.app
-  proxy: inoreader.com
+  proxy: www.inoreader.com
 
 replaced_urls:
-  - old: inoreader.com
+  - old: www.inoreader.com
     new: inoreader.vercel.app
 `
 var Config *Yaml
