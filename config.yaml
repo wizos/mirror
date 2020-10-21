@@ -1,0 +1,10 @@
+enable_ssl: True
+handle_cookie: True
+
+host:
+  self: inoreader.vercel.app
+  proxy: inoreader.com
+
+replaced_urls:
+  - old: inoreader.com
+    new: inoreader.vercel.app
