@@ -86,7 +86,7 @@ func rewriteBody(resp *http.Response) (err error) {
 		resp.Header.Set("Set-Cookie", removeCookie(cookie))
 	}
 
-	content = addNotification(content)
+	// content = addNotification(content)
 	resp.Body = ioutil.NopCloser(bytes.NewReader(content))
 	resp.ContentLength = int64(len(content))
 	resp.Header.Set("Content-Length", strconv.Itoa(len(content)))
@@ -110,10 +110,3 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 	proxy.ServeHTTP(w, r)
 }
-
-// func main() {
-// 	http.HandleFunc("/", Handler)
-// 	// http.ListenAndServe(":3000", nil)
-// 	http.ListenAndServeTLS(":3000", "/home/wincer/.local/share/mkcert/rootCA.pem", "/home/wincer/.local/share/mkcert/rootCA-key.pem", nil)
-// 	log.Println("Listening in :3000")
-// }
